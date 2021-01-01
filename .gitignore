@@ -1,0 +1,6 @@
+openLdap/data
+crash.log
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.lock.hcl
+.terraform
