@@ -119,5 +119,48 @@ Need to finish assigining the values to resource schema for comparision purpose.
         }
         ```
 
+-----------------------------------
+
+# MISC
+
+CI: Azure DevOps Build Pipeline Build CI is not new to you
+CD: Azure DevOps release pipeline —> Jira raised, All Run team needs to do is to create a release Branch with that Jira Number
+
+			    Jira
+		 		 |
+		    Release branch with Jira
+				 |
+		    ADO pipeline triggered
+		  		|
+		ADO with Connect to Jira to fetch the details
+		  		|
+		        Create the config
+		  		|
+		        Validate the config
+		 		|
+        If validation passed, Create a PR (git request-pull release/Jira https://git.ko.xz/project master) No need for that as well but just a gatekeeper before the changes
+		  		| 
+		        PR Approved
+		  		|
+        Trigger Build ADO pipeline which will create Assyst record based on Jira template
+		  		|
+        And post Assyst is in implementation stage, triggers a Jenkins job to deploy the changes (Again Jenkins will have review gate keeping)
+	  			|
+			    /      \
+	            Update/del	    New
+  		        /		\
+        Jenkins will 		First Jenkins will create the certificate and Trigger the Step Function as well
+        handle		            \
+					Step function is a set of lambda functions arranged in a logical formation to address the specific need.
+					        \ 
+					First lambda will keep monitoring the Pending certificate and keep sending notification to DNS admin for DCV
+			                            \
+					Upon Certificate issued stack implementation plan will be email to DevOps Team for verification and approval
+			   			        \
+					Upon Approval Lambda will update the listener certificates, create rules/Stack, attach respective certificates, Email the IPs to DNS Admin and requester
+						            \
+					Lambda will trigger ADO pipeline ? Possible ? For a testing.
+						                \
+					Merge PR and Close the Assyst record
 
 
